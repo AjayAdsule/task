@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,16 +35,25 @@ export default function useTask() {
       id: "",
       title: "",
       description: "",
-      status: "",
+      status: "todo",
     },
   });
+
+  useEffect(() => {
+    const getTask = JSON.parse(localStorage.getItem("task") as string);
+    setTask(getTask);
+  }, []);
 
   const createTask = (data: Task) => {
     const newTask: Task = {
       ...data,
       id: task.length + 1,
     };
-    setTask([...task, newTask]);
+    setTask((prev) => {
+      const updatedTask = [...prev, newTask];
+      localStorage.setItem("task", JSON.stringify(updatedTask));
+      return updatedTask;
+    });
     setIsTaskModelOpen(false);
     formMethods.reset();
   };
@@ -52,18 +61,20 @@ export default function useTask() {
   const updateTask = (id: number, data: Task) => {
     const updatedTasks = task.map((t) => (t.id === id ? { ...t, ...data } : t));
     setTask(updatedTasks);
-    formMethods.reset({ id: "", title: "", description: "", status: "" });
+    localStorage.setItem("task", JSON.stringify(updatedTasks));
+    formMethods.reset({ id: "", title: "", description: "", status: "todo" });
     setIsTaskModelOpen(false);
     setIsEditTask(false);
   };
 
   const deleteTask = (id: number) => {
     const updatedTasks = task.filter((t) => t.id !== id);
+    localStorage.setItem("task", JSON.stringify(updatedTasks));
     setTask(updatedTasks);
   };
 
   const onModalClose = () => {
-    formMethods.reset({ id: "", title: "", description: "", status: "" });
+    formMethods.reset({ id: "", title: "", description: "", status: "todo" });
     setIsTaskModelOpen(false);
     setIsEditTask(false);
   };

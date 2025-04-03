@@ -18,7 +18,6 @@ const TaskModel = () => {
   const { formMethods, createTask, isEditTask, updateTask } = useTaskContext();
 
   const onSubmit = (data: Task) => {
-    console.log(data);
     if (isEditTask && data.id) {
       updateTask(data.id, data);
     } else {

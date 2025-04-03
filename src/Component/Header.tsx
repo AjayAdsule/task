@@ -5,10 +5,10 @@ const Header = () => {
   const { onModalOpen } = useTaskContext();
 
   return (
-    <div className="flex justify-between p-2 items-center border rounded-md ">
-      <h5 className="text-2xl">Users</h5>
+    <div className="flex justify-between p-2 items-center border rounded-md bg-secondary">
+      <h5 className="text-2xl">Tasks</h5>
       <Button variant={"default"} onClick={onModalOpen}>
-        Create User
+        Create Task
       </Button>
     </div>
   );
