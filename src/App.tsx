@@ -5,6 +5,7 @@ import TaskTable from "./Component/TaskTable";
 function App() {
   return (
     <>
+      <title>User Task</title>
       <Header />
       <TaskTable />
     </>

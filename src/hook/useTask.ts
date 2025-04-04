@@ -41,13 +41,13 @@ export default function useTask() {
 
   useEffect(() => {
     const getTask = JSON.parse(localStorage.getItem("task") as string);
-    setTask(getTask);
+    setTask(getTask ?? []);
   }, []);
 
   const createTask = (data: Task) => {
     const newTask: Task = {
       ...data,
-      id: task.length + 1,
+      id: task?.length + 1,
     };
     setTask((prev) => {
       const updatedTask = [...prev, newTask];

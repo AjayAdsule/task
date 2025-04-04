@@ -46,7 +46,7 @@ const TaskTable = () => {
           onChange={onChange}
         />
       </div>
-      {tasks ? (
+      {tasks.length > 0 ? (
         <table className="w-full bg-white border border-gray-200 mt-4">
           <thead>
             <tr className="bg-gray-100 border-b">
