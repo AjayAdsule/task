@@ -33,7 +33,7 @@ const TaskModel = () => {
   return (
     <Dialog open={isTaskModelOpen} onOpenChange={onModalClose}>
       <DialogContent className="w-[400px]">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-[350px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-full">
           {/* Title Field */}
           <div className="flex flex-col ">
             <label className=" text-sm font-medium">Title</label>
